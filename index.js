@@ -1,10 +1,7 @@
 
 window.onload=function(){ 
-
     document.getElementById("btn").onclick=function(){   
         const usersId=document.getElementById("num").value;
-
-        
         fetchUsers(usersId);
     }
 }
@@ -16,20 +13,25 @@ async function fetchUsers(usersId){
 function renderUsers(user){
     const userDiv =document.getElementById('numberOfUsers');
     userDiv.innerHTML = '';
+    
         let template =`
-        
-        <div class="col">
-        ${user.name}
-            </div>
-            <div class="col">
-            <p>${user.email} </p>
-                <p class="fw-bold">Address</p>
+        <h2 class="text-primary">User Information :</h2>
+        <div class="container p-5 my-5 border">
+        <div class="col-4">
+        <p>${user.name}</p>
+        <p>${user.email} </p>
+        <p class="text-danger">Address</p>
                 <p>${user.address.street}</p>
                 <p> ${user.address.suite}</p>
                 <p> ${user.address.city}</p>
                 <p> ${user.address.zipcode}</p> 
             </div>
-            <button id="Getpost">Get Post</button>
+            <div class="row-4">
+            <button id="Getpost"class="btn btn-primary">Get Post</button>
+            </div>
+           
+        </div>
+       
             <hr>
         `
   
@@ -54,15 +56,15 @@ function renderPosts(user){
     userDiv.innerHTML = '';
     user.map(post => {
         let template =`
-        <div class="col">
-        <p>user posts</p> 
-        ${post.title}
+        <h2  class="text-primary">User Posts</h2> 
+        <div class="col-4">
+       <p> Title: ${post.title}</p>
+       <p>body: ${post.body} </p> 
             </div>
-            <div class="col">
-            <p>${post.body} </p> 
+          
+            <div class="row-4">
+            <button id="comment" class="btn btn-info">show comment</button>
             </div>
-            <button id="comment">show comment</button>
-            <hr>
         `
   
        let div = document.createElement('div'); 
@@ -87,16 +89,14 @@ function renderComment(comments){
 
     userDiv.innerHTML = '';
     comments.map(comment => {
-        let template =`
-        <div class="col">
-        <p>user posts</p> 
-        ${comment.name}
-            </div>
-            <div class="col">
-            <p>${comment.email} </p> 
-            <p>${comment.body} </p> 
-            </div>
-            
+        let template =` 
+        <p class="text-danger">Comment :</p>
+        <div class="row-4">
+        <p>Name : ${comment.name}</p>
+        <p>Email :${comment.email} </p> 
+        <p>body : ${comment.body} </p> 
+        </div>
+      
             <hr>
         `
 
@@ -104,9 +104,6 @@ function renderComment(comments){
        div.innerHTML = template;
        div.classList='row' 
        userDiv.appendChild(div);
-       
-
-
     })
 }
 
